@@ -1,0 +1,52 @@
+version: "3.8"
+
+services:
+  pgvector:
+    image: ankane/pgvector
+    container_name: pgvector
+    restart: always
+    ports:
+      - "5432:5432"
+    environment:
+      POSTGRES_USER: pguser
+      POSTGRES_PASSWORD: pgpass
+      POSTGRES_DB: pgdb
+    volumes:
+      - pgdata:/var/lib/postgresql/data
+  # ollama:
+  #   image: ollama/ollama
+  #   container_name: ollama
+  #   restart: always
+  #   ports:
+  #     - "11434:11434"
+  #   volumes:
+  #     - ollama_data:/root/.ollama
+  #   environment:
+  #     - OLLAMA_MODELS=llama3
+  # init-loader:
+  #   build: .
+  #   container_name: init-loader
+  #   depends_on:
+  #     - pgvector
+  #   environment:
+  #     - DB_CONN=postgresql+psycopg2://pguser:pgpass@pgvector:5432/pgdb
+  #   command: ["python", "populate_rag.py"]
+  #   volumes:
+  #     - ./Bookshelf:/app/Bookshelf
+  # rag-api:
+  #   build: .
+  #   container_name: rag-api
+  #   depends_on:
+  #     - pgvector
+  #     - ollama
+  #     - init-loader
+  #   ports:
+  #     - "8000:8000"
+  #   environment:
+  #     - DB_CONN=postgresql+psycopg2://pguser:pgpass@pgvector:5432/pgdb
+  #     - OLLAMA_URL=http://ollama:11434
+  #   command: uvicorn rag_api:app --host 0.0.0.0 --port 8000
+
+volumes:
+  pgdata:
+  # ollama_data:

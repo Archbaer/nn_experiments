@@ -1,0 +1,13 @@
+fastapi
+uvicorn
+psycopg2-binary
+sqlalchemy
+langchain
+pgvector
+langchain-community
+langchain-huggingface
+sentence-transformers
+PyMuPDF
+pypdf
+torch
+langchain-text-splitters
