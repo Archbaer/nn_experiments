@@ -29,7 +29,7 @@ vectorstore = PGVector(
 # Chat model setup
 # When deploying, or you don't have ollama. 
 # Either install ollama for an open source LLM or use open ai's gpt-4o-mini
-llm = ChatOllama(model="deepseek-r1:7b", base_url="http://localhost:11434")
+llm = ChatOllama(model="llama3.2", base_url="http://localhost:11434")
 
 # Retriever setup
 # k=10 means we retrieve the top 10 relevant chunks
