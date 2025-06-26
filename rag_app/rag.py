@@ -3,10 +3,9 @@ from langchain_huggingface import HuggingFaceEmbeddings
 from langchain_core.runnables import RunnablePassthrough
 from langchain.schema.output_parser import StrOutputParser
 from langchain_postgres.vectorstores import PGVector
-from langchain_openai import OpenAIEmbeddings
 from langchain_ollama import ChatOllama
 from langchain_openai import ChatOpenAI
-from langchain.chains import RetrievalQA
+from populate_rag import populate_rag 
 from langchain_core.prompts import PromptTemplate
 from dotenv import load_dotenv
 import os
@@ -65,6 +64,9 @@ rag_chain = (
 
 # Query function
 def ask_question(query: str) -> str:
+    if not vectorstore:
+        print("Vector store is not initialized. Populating RAG database...")
+        populate_rag()
     return rag_chain.invoke(query)
 
 if __name__ == "__main__":

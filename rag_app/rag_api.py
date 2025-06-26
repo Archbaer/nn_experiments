@@ -16,4 +16,4 @@ async def ask(query: Query):
 if __name__ == "__main__":
     # host: '0.0.0.0' for docker
     # host: '127.0.0.1' for local
-    uvicorn.run("rag_api:app", host="0.0.0.0", port=3584, reload=True)
+    uvicorn.run("rag_api:app", host="127.0.0.1", port=3584, reload=True)
